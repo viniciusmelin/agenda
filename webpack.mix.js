@@ -27,7 +27,6 @@ mix.copy('node_modules/datatables.net/js/jquery.dataTables.js','public/adminlte/
 mix.copy('node_modules/jquery/dist/jquery.js','public/js/jquery.min.js');
 mix.copy('node_modules/ionicons/dist/css/ionicons.css','public/ionicons/css/ionicons.min.css');
 mix.copy('node_modules/ionicons/dist/fonts','public/ionicons/fonts');
-
 mix.copy('resources/assets/js/notify.min.js','public/js/notify.min.js');
 mix.copy('resources/assets/js/patient/patient.js','public/js/patient.min.js');
 mix.copy('resources/assets/js/patient/patient_pes.js','public/js/patient_pes.min.js');
