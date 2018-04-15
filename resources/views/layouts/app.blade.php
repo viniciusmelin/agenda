@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="{{ asset('ionicons/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/css/skins/all-skins.min.css')}} ">
-    
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck/square/_all.min.css')}} "/>
+
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables/css/dataTables.bootstrap.min.css') }}">
 
     
@@ -38,17 +39,12 @@
 
         @include('layouts.header')
         @include('layouts.sidebar')
-        @endguest
+      
         
         <div class="content-wrapper" >
             @foreach (['error','warning','success','danger'] as $session )
                 @if(session($session))
-
-                    <div class="alert alert-success">
-                            {{ session($session) }}
-                            {{$session}}
-                    </div>
-
+                <span class="hidden informacao" data-classe="{{$session}}">{{ session($session) }}</span>
                 @endif
               
             @endforeach 
@@ -56,15 +52,31 @@
                 @yield('content')
             </section>
         </div>
+        @endguest
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/notify.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/icheck/icheck.min.js') }}"></script>
     <script>
-
+            $(function () {
+              $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+              });
+            });
     </script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            if ($(".informacao").text() != "") {
+                $.notify($(".informacao").text(), $(".informacao").data("classe"));
+            }
+        });
+       </script>
     @yield('adminlte_js')
 </body>
 </html>

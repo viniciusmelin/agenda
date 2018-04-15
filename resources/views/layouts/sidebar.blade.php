@@ -26,8 +26,6 @@
                 </a>
                 <ul class="treeview-menu">
                   <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i>Usuários</a></li>
-                  <li><a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i> Regras</a></li>
-                  <li><a href="{{route('permission.index')}}"><i class="fa fa-circle-o"></i> Permissões</a></li>
                 </ul>
               </li>
 

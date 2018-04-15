@@ -29,28 +29,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Roles');
-    }
-
     public function doctor()
     {
         return $this->belongsTo('App\Doctor');
     }
 
-    public function hasPermission(Permissions $permission)
-    {
-        return $this->hasAnyRoles($permission->roles);
-    }
-
-    public function hasAnyRoles($roles)
-    {
-        if(is_array($roles)|| is_object($roles))
-        {
-            return !! $roles->intersect($this->roles)->count();            
-        }
-
-        return $this->roles->contains('name',$roles);
-    }
 }

@@ -24,11 +24,26 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'riquired'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users'.($this->id ? ",id,$this->id":""),
+            'password' => 'required|string|min:6|confirmed',
         ];
     }
     public function messages()
     {
-        return ['email.riquired'=>'Campo Obrigatório'];
+         return [
+            'name.required'=>'Nome é obrigatório!',
+            'name.string'=>'Nome deve ser do tipo texto!',
+            'name.max'=>'Tamanho maxímo de 255 caracteres!',
+            'email.required' =>'Email é obrigatório',
+            'email.string' =>'Email deve ser do tipo texto',
+            'email.email' =>'Email não é valído!',
+            'email.max' =>'Tamanho maxímo de 255 caracteres!',
+            'password.required' =>'Senha é obrigatório!',
+            'email.unique'=>'Email já cadastrado!',
+            'password.string' =>'Senha deve ser do tipo texto!',
+            'password.max' =>'Senha deve conter no minímo 6 caracteres!',            
+            'password.confirmed' =>'Repetir Senha novamente!'  
+        ];
     }
 }

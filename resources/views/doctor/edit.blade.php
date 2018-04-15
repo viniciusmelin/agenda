@@ -1,8 +1,4 @@
 @extends('layouts.app') 
-@section('adminlte_css')
-<link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck/square/_all.min.css')}} "/>
-@endsection
-
 @section('content')
 <div class="row">
         <div class="col-md-6 col-lg-6">
@@ -34,10 +30,10 @@
                                     <label for="active">Ativo</label>
                                     <div class="">
                                         <label>
-                                            <input type="radio" class="minimal" name="active" id="active" value="1" checked> Sim
+                                            <input type="radio" class="minimal" name="active" id="active1" value="1"> Sim
                                         </label>
                                         <label>
-                                            <input type="radio" class="minimal" name="active" id="active" value="0"> Não
+                                            <input type="radio" class="minimal" name="active" id="active0" value="0"> Não
                                         </label>
                                     </div>
                                 </div>
@@ -58,13 +54,10 @@
     </div>
 @endsection
 @section('adminlte_js')
-<script src="{{ asset('adminlte/plugins/icheck/icheck.min.js') }}"></script>
 <script>
- {{-- $(document).ready(function(){
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-        checkboxClass: 'icheckbox_minimal-blue',
-        radioClass   : 'iradio_minimal-blue'
-      })
- });     --}}
+        $(document).ready(function(){
+            var check = {{$doctor->active}}
+            $('#active'+check).iCheck('check');
+        });    
 </script>
 @endsection

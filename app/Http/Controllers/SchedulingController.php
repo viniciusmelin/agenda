@@ -29,8 +29,8 @@ class SchedulingController extends Controller
      */
     public function create()
     {
-        $patients = Patient::all();
-        $doctors = Doctor::all();
+        $patients = Patient::where('active',1)->get();
+        $doctors = Doctor::where('active',1)->get();
         $date = Carbon::now()->format('Y-m-d');
         return view('scheduling.create',compact('patients','doctors','date'));
     }
@@ -51,7 +51,7 @@ class SchedulingController extends Controller
             DB::beginTransaction();
             if($scheduling->save())
             {
-                \Session::flash('success',"Consulta cadastrado com sucesso");
+                \Session::flash('success',"Consulta cadastrada com sucesso");
                 DB::commit();
                 return redirect()->route('scheduling.index');
             }
@@ -102,21 +102,22 @@ class SchedulingController extends Controller
         try
         {
 
+
             DB::beginTransaction();
             if(Scheduling::where('id',$id)->update($request->except('_token','_method')))
             {
-                \Session::flash('success',"Paciente atualizado com sucesso");
+                \Session::flash('success',"Consulta atualizado com sucesso!");
                 DB::commit();
                 return redirect()->route('scheduling.index');
             }
             DB::rollBack();
-            \Session::flash('warning','Não foi possível atualizar Paciente');
+            \Session::flash('warning','Não foi possível atualizar Consulta!');
             return back()->withInput();  
         }
         catch(\Exception $ex)
         {
             DB::rollBack();
-            \Session::flash('danger','Não foi possível atualizar Paciente');
+            \Session::flash('danger','Não foi possível atualizar Consulta!');
             return back()->withInput();
         }
     }
@@ -163,10 +164,10 @@ class SchedulingController extends Controller
 
     public function getJsonPatient(Request $request)
     {
-         return json_encode(DB::table('patients')->where('name','like','%'.$request->search.'%')->select('id','name')->get());
+         return json_encode(DB::table('patients')->where('name','like','%'.$request->search.'%')->where('active','=',1)->select('id','name')->get());
     }
     public function getJsonDoctor(Request $request)
     {
-         return json_encode(DB::table('doctor')->where('name','like','%'.$request->search.'%')->select('id','name')->get());
+         return json_encode(DB::table('doctor')->where('name','like','%'.$request->search.'%')->where('active','=',1)->select('id','name')->get());
     }
 }

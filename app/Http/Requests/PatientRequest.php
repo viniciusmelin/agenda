@@ -19,12 +19,12 @@ class PatientRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.riquired'=>'Campo é Obrigatório!',
+            'name.required'=>'Campo é Obrigatório!',
             'name.max'=> 'Tamanho maxímo é de 50 caracteres!',
-            'name.min'=> 'Tamanho minímo é de 1 caracteres!',
-            'age.riquired' => 'Campo é Obrigatório!',
+            'name.min'=> 'Tamanho minímo é de 2 caracteres!',
+            'age.required' => 'Campo é Obrigatório!',
             'age.numeric' => 'Campo pode ser somente numérico!',
-            'date_birth.riquired' => 'Campo é Obrigatório!',
+            'date_birth.required' => 'Campo é Obrigatório!',
             'date_birth.date' => 'Campo não é uma data valída!'
         ];
     }
@@ -36,9 +36,9 @@ class PatientRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this);
+        
         return [
-            'name' => 'required|max:50|min:1',
+            'name' => 'required|max:50|min:2',
             'age'=> 'required|numeric',
             'date_birth' => 'required|date'
         ];

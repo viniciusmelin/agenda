@@ -83,7 +83,7 @@ class UserController extends Controller
             {
                 \Session::flash('success',"Usuário atualizado com sucesso");
                 DB::commit();
-                return redirect()->route('users.index');
+                return redirect()->route('user.index');
             }
             DB::rollBack();
             \Session::flash('warning','Não foi possível atualizar Usuário');
@@ -91,7 +91,7 @@ class UserController extends Controller
         }
         catch(\Exception $ex)
         {
-            dd($ex);
+
             DB::rollBack();
             \Session::flash('danger','Não foi possível atualizar Usuário');
             return back()->withInput();
@@ -104,8 +104,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try
+        {
+            $user = User::find($request->id);
+            if(empty($user))
+            {
+                return json_encode(['result'=>'error','msg'=>'Não foi encontrado nenhum registro!']);
+            }
+            if($user->delete())
+            {
+
+                return json_encode(['result'=>'ok','class'=>'success','msg'=>'Usuário excluído com sucesso!']);
+            }
+            else
+            {
+
+                return json_encode(['result'=>'error','class'=>'error','msg'=>'Não foi possível excluir Usuário!']);
+            }
+        }
+        catch(\Exception $e)
+        {
+            return json_encode(['result'=>'error','class'=>'error','msg'=>$e]);
+        }
     }
 }

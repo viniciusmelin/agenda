@@ -25,7 +25,7 @@
                         <tr>
                             <td>{{$doctor->id}}</td>
                             <td>{{$doctor->name}}</td>
-                            <td>{{$doctor->active}}</td>
+                            <td>{{$doctor->active==1?'Sim':'Não'}}</td>
                             <td>
                                     <a href="{{route('doctor.edit',$doctor->id)}}" class="btn btn-xs btn-primary" title="Editar Doctor"><i class="glyphicon glyphicon-edit"></i></a>
                                     <a data-toggle="modal" data-target="#modalRemoveDoctor" class="btn btn-xs btn-danger" title="Remover Médico"><i class="glyphicon glyphicon-trash"></i></a>

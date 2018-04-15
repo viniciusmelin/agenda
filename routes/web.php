@@ -53,18 +53,5 @@ Route::post('/user/store','UserController@store')->name('user.store');
 Route::patch('/user/update/{id}','UserController@update')->name('user.update');
 Route::post('/user/delete','UserController@destroy')->name('user.delete');
 
-Route::get('/role','RoleController@index')->name('role.index');
-Route::get('/role/create','RoleController@create')->name('role.create');
-Route::get('/role/edit/{id}','RoleController@edit')->name('role.edit');
-Route::post('/role/store','RoleController@store')->name('role.store');
-Route::patch('/role/update/{id}','RoleController@update')->name('role.update');
-Route::post('/role/delete','RoleController@destroy')->name('role.delete');
-
-Route::get('/permission','PermissionController@index')->name('permission.index');
-Route::get('/permission/create','PermissionController@create')->name('permission.create');
-Route::get('/permission/edit/{id}','PermissionController@edit')->name('permission.edit');
-Route::post('/permission/store','PermissionController@store')->name('permission.store');
-Route::patch('/permission/update/{id}','PermissionController@update')->name('permission.update');
-Route::post('/permission/delete','PermissionController@destroy')->name('permission.delete');
 
 

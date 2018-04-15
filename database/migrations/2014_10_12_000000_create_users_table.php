@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('doctor_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('doctor_id')->references('id')->on('doctor');
+            $table->foreign('doctor_id')->references('id')->on('doctor')->onDelere('cascade');
         });
     }
 

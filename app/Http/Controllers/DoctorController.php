@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use App\Http\Requests\DoctorRequest;
 use App\Doctor;
 
 class DoctorController extends Controller
@@ -35,7 +37,7 @@ class DoctorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DoctorRequest $request)
     {
         try
         {
@@ -69,8 +71,8 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        $doctor = Doctor::find($id);
-        return view('doctor.edit',compact('doctor'));
+        // $doctor = Doctor::find($id);
+        // return view('doctor.edit',compact('doctor'));
     }
 
     /**
@@ -93,11 +95,10 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DoctorRequest $request, $id)
     {
         try
         {
-
             DB::beginTransaction();
             if(Doctor::where('id',$id)->update($request->except('_token','_method')))
             {
@@ -111,6 +112,7 @@ class DoctorController extends Controller
         }
         catch(\Exception $ex)
         {
+            
             DB::rollBack();
             \Session::flash('danger','Não foi possível atualizar Médico');
             return back()->withInput();
@@ -134,26 +136,18 @@ class DoctorController extends Controller
             }
             if($doctor->delete())
             {
-                \Session::flash('flash_message',
-                [ 
-                    'msg'=>'Médico excluído com sucesso!',
-                    'class'=>'alert-success'
-                ]);
-                return json_encode(['result'=>'ok','action'=>'delete']);
+
+                return json_encode(['result'=>'ok','class'=>'success','msg'=>'Médico excluído com sucesso!']);
             }
             else
             {
-                \Session::flash('flash_message',
-                [ 
-                    'msg'=>'Não foi possível excluir Médico!',
-                    'class'=>'alert-danger'
-                ]);
-                return json_encode(['result'=>'error','msg'=>'Não foi possível excluir Médico!']);
+
+                return json_encode(['result'=>'error','class'=>'error','msg'=>'Não foi possível excluir Médico!']);
             }
         }
         catch(\Exception $e)
         {
-            return json_encode(['result'=>'error','msg'=>$e]);
+            return json_encode(['result'=>'error','class'=>'error','msg'=>$e]);
         }
     }
 }

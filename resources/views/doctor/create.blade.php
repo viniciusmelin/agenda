@@ -56,14 +56,3 @@
         </div>
     </div>
 @endsection
-@section('adminlte_js')
-<script src="{{ asset('adminlte/plugins/icheck/icheck.min.js') }}"></script>
-<script>
- {{-- $(document).ready(function(){
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-        checkboxClass: 'icheckbox_minimal-blue',
-        radioClass   : 'iradio_minimal-blue'
-      })
- });     --}}
-</script>
-@endsection

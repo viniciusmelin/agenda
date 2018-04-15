@@ -1,6 +1,4 @@
 @extends('layouts.app') 
-@section('adminlte_css')
-<link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck/square/_all.min.css')}} "/>
 @endsection
 
 @section('content')
@@ -95,8 +93,4 @@
             <!-- /.box -->
         </div>
     </div>
-@endsection
-@section('adminlte_js')
-<script src="{{ asset('adminlte/plugins/icheck/icheck.min.js') }}"></script>
-</script>
 @endsection

@@ -29,7 +29,7 @@
                                 <td>{{$patient->name}}</td>
                                 <td>{{$patient->age}}</td>
                                 <td>{{$patient->date_birth}}</td>
-                                <td>{{$patient->active}}</td>
+                                <td>{{$patient->active==0 ? 'Não':'Sim'}}</td>
                                 <td>
                                     <a href="{{route('patient.edit',$patient->id)}}" class="btn btn-xs btn-primary" title="Editar Paciente"><i class="glyphicon glyphicon-edit"></i></a>
                                     <a data-toggle="modal" data-target="#modalRemovePatient" class="btn btn-xs btn-danger" title="Remover Paciente"><i class="glyphicon glyphicon-trash"></i></a>
