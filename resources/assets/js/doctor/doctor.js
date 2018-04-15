@@ -1,4 +1,6 @@
-var tableDoctor = $('#tableDoctors').DataTable();
+var tableDoctor = $('#tableDoctors').DataTable({    "language": {
+    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json",
+}});
 var row;
 $('#tableDoctors').on('click','tbody tr',function(){
     var data = tableDoctor.row(this).data();

@@ -1,4 +1,6 @@
-var tableScheduling = $('#tablescheduling').DataTable();
+var tableScheduling = $('#tablescheduling').DataTable({    "language": {
+    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json",
+}});
 var row;
 $('#tablescheduling').on('click','tbody tr',function(){
     var data = tableScheduling.row(this).data();

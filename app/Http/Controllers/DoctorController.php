@@ -150,4 +150,12 @@ class DoctorController extends Controller
             return json_encode(['result'=>'error','class'=>'error','msg'=>$e]);
         }
     }
+
+    public function json()
+    {
+       
+        $doctors = Doctor::all();
+        return response()->json($doctors);
+        
+    }
 }
