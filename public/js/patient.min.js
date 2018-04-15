@@ -1,4 +1,6 @@
-var tablePatient = $('#tablepatient').DataTable();
+var tablePatient = $('#tablepatient').DataTable({    "language": {
+    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Portuguese-Brasil.json",
+}});
 var row;
 $('#tablepatient').on('click','tbody tr',function(){
     var data = tablePatient.row(this).data();

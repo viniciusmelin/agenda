@@ -29,8 +29,8 @@
                                 <td>{{$scheduling->patient->name}}</td>
                                 <td>{{$scheduling->date}}</td>
                                 <td>
-                                    <a href="{{route('scheduling.edit',$scheduling->id)}}" class="btn btn-xs btn-primary" title="Editar Paciente"><i class="glyphicon glyphicon-edit"></i></a>
-                                    <a data-toggle="modal" data-target="#modalRemoveScheduling" class="btn btn-xs btn-danger" title="Remover Paciente"><i class="glyphicon glyphicon-trash"></i></a>
+                                    <a href="{{route('scheduling.edit',$scheduling->id)}}" class="btn btn-xs btn-primary" title="Editar Consulta"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a data-toggle="modal" data-target="#modalRemoveScheduling" class="btn btn-xs btn-danger" title="Remover Consulta"><i class="glyphicon glyphicon-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
