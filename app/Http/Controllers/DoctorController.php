@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Doctor;
 
 class DoctorController extends Controller
 {
@@ -13,7 +15,8 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        return view('doctor.index');
+        $doctors = Doctor::all();
+        return view('doctor.index',compact('doctors'));
     }
 
     /**
@@ -23,7 +26,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-       
+       return view('doctor.create');
     }
 
     /**
@@ -34,7 +37,28 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try
+        {
+            
+            $doctor = new Doctor($request->all());
+            DB::beginTransaction();
+            if($doctor->save())
+            {
+                \Session::flash('success',"Paciente cadastrado com sucesso");
+                DB::commit();
+                return redirect()->route('doctor.index');
+            }
+            DB::rollBack();
+            \Session::flash('warning','Não foi possível cadastrar Paciente');
+            dd('fff');
+            return back()->withInput();  
+        }
+        catch(\Exception $ex)
+        {
+            DB::rollBack();
+            \Session::flash('danger','Não foi possível cadastrar Paciente');
+            return back()->withInput();
+        }
     }
 
     /**
@@ -45,7 +69,8 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $doctor = Doctor::find($id);
+        return view('doctor.edit',compact('doctor'));
     }
 
     /**
@@ -56,7 +81,9 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $doctor = Doctor::find($id);
+        return view('doctor.edit',compact('doctor'));
     }
 
     /**
@@ -68,7 +95,26 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try
+        {
+
+            DB::beginTransaction();
+            if(Doctor::where('id',$id)->update($request->except('_token','_method')))
+            {
+                \Session::flash('success',"Médico atualizado com sucesso");
+                DB::commit();
+                return redirect()->route('doctor.index');
+            }
+            DB::rollBack();
+            \Session::flash('warning','Não foi possível atualizar Médico');
+            return back()->withInput();  
+        }
+        catch(\Exception $ex)
+        {
+            DB::rollBack();
+            \Session::flash('danger','Não foi possível atualizar Médico');
+            return back()->withInput();
+        }
     }
 
     /**
@@ -77,8 +123,37 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try
+        {
+            $doctor = Doctor::find($request->id);
+            if(empty($doctor))
+            {
+                return json_encode(['result'=>'error','msg'=>'Não foi encontrado nenhum registro!']);
+            }
+            if($doctor->delete())
+            {
+                \Session::flash('flash_message',
+                [ 
+                    'msg'=>'Médico excluído com sucesso!',
+                    'class'=>'alert-success'
+                ]);
+                return json_encode(['result'=>'ok','action'=>'delete']);
+            }
+            else
+            {
+                \Session::flash('flash_message',
+                [ 
+                    'msg'=>'Não foi possível excluir Médico!',
+                    'class'=>'alert-danger'
+                ]);
+                return json_encode(['result'=>'error','msg'=>'Não foi possível excluir Médico!']);
+            }
+        }
+        catch(\Exception $e)
+        {
+            return json_encode(['result'=>'error','msg'=>$e]);
+        }
     }
 }

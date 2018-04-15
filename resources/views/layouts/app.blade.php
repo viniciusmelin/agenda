@@ -26,6 +26,7 @@
     
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables/css/dataTables.bootstrap.min.css') }}">
 
+    
     @yield('adminlte_css')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -34,22 +35,36 @@
 
         @guest
         @else
+
         @include('layouts.header')
         @include('layouts.sidebar')
         @endguest
         
-        <div class="content-wrapper">
-            
+        <div class="content-wrapper" >
+            @foreach (['error','warning','success','danger'] as $session )
+                @if(session($session))
+
+                    <div class="alert alert-success">
+                            {{ session($session) }}
+                            {{$session}}
+                    </div>
+
+                @endif
+              
+            @endforeach 
             <section class="content">
                 @yield('content')
             </section>
         </div>
     </div>
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables/js/dataTables.bootstrap.min.js') }}"></script>
-    
+    <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
+    <script>
+
+    </script>
+    @yield('adminlte_js')
 </body>
 </html>

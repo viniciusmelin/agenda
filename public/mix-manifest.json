@@ -30,5 +30,10 @@
     "/adminlte/plugins/datatables/js/dataTables.bootstrap.min.js": "/adminlte/plugins/datatables/js/dataTables.bootstrap.min.js",
     "/adminlte/plugins/datatables/js/jquery.dataTables.min.js": "/adminlte/plugins/datatables/js/jquery.dataTables.min.js",
     "/js/jquery.min.js": "/js/jquery.min.js",
-    "/ionicons/css/ionicons.min.css": "/ionicons/css/ionicons.min.css"
+    "/ionicons/css/ionicons.min.css": "/ionicons/css/ionicons.min.css",
+    "/js/patient.min.js": "/js/patient.min.js",
+    "/js/patient_pes.min.js": "/js/patient_pes.min.js",
+    "/js/doctor.min.js": "/js/doctor.min.js",
+    "/js/doctor_pes.min.js": "/js/doctor_pes.min.js",
+    "/js/scheduling.min.js": "/js/scheduling.min.js"
 }
